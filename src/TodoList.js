@@ -7,8 +7,8 @@ const TodoList = () => {
     const [todo, setTodo] = useState("");
     const [todos, setTodos] = useState([]);
 
-    const addTodos = (todotext) => {
-        const newTodos = [...todos, todotext]; //3meli copy lal array wzedli 3a e5era todotext ljdidi elli ana bzida 
+    const addTodo = (todotext) => {
+        const newTodos = [...todos, { todotext }]; //3meli copy lal array wzedli 3a e5era todotext ljdidi elli ana bzida 
         setTodos(newTodos);
     };
 
@@ -16,17 +16,19 @@ const TodoList = () => {
         event.preventDefault();
         //function that saves the todo
         if (!todo) return;
-        addTodos(todo);
+        addTodo(todo);
         setTodo(""); //bsayev l todos berj3 bsayev l todo  bb3at la todos the todo
 
     }
     const removeTodo = (index) => {
-        const removedtodo = [...todos];
-        removedtodo.splice(index);
-        setTodos(removedtodo);
+        const newTodos = [...todos]
+        newTodos.splice(index, 1);
+        setTodos(newTodos);
     }
-    const completeTodo = () => {
-
+    const completeTodo = (index) => {
+        const newTodos = [...todos]
+        newTodos[index].isCompleted = true;
+        setTodos(newTodos);
     }
 
     return (
